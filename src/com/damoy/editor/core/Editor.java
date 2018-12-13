@@ -4,7 +4,9 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.UIManager;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.plaf.metal.OceanTheme;
@@ -12,6 +14,7 @@ import javax.swing.plaf.metal.OceanTheme;
 public class Editor {
 
 	private JTextArea textArea;
+	private JScrollPane verticalScrollPane;
 	private JFrame frame;
 	private JMenuBar menuBar;
 	
@@ -40,14 +43,21 @@ public class Editor {
 	private void build() {
 		frame = new JFrame("Editor");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(false);
+		frame.setResizable(true);
 		frame.setLocationRelativeTo(null);
 		frame.pack();
 		
 		textArea = new JTextArea();
+		textArea.setLineWrap(true);
+		textArea.setWrapStyleWord(true);
+		
+		verticalScrollPane = new JScrollPane(textArea);
+		verticalScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		
+		frame.add(verticalScrollPane);
+		
 		menuBar = new JMenuBar();
 		listener = new EditorListener(this);
-		frame.addKeyListener(listener);
 		
 		buildFileMenu();
 		buildEditMenu();
@@ -56,7 +66,6 @@ public class Editor {
 		menuBar.add(editMenu);
 		
 		frame.setJMenuBar(menuBar);
-		frame.add(textArea);
 		frame.setSize(400, 400);
 		frame.setVisible(true);
 		
@@ -160,4 +169,8 @@ public class Editor {
 		return exitItem;
 	}
 
+	public JScrollPane getVerticalScrollPane() {
+		return verticalScrollPane;
+	}
+	
 }

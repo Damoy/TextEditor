@@ -2,8 +2,6 @@ package com.damoy.editor.core;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.print.PrinterException;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -16,9 +14,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
-import com.damoy.editor.input.Keys;
-
-public class EditorListener implements ActionListener, KeyListener  {
+public class EditorListener implements ActionListener {
 
 	private Editor source;
 	
@@ -115,17 +111,4 @@ public class EditorListener implements ActionListener, KeyListener  {
 		source.getTextArea().setText("");
 	}
 	
-	@Override
-	public void keyTyped(KeyEvent e) {}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		Keys.keySet(e.getKeyCode(), true);
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		Keys.keySet(e.getKeyCode(), false);
-	}
-
 }
